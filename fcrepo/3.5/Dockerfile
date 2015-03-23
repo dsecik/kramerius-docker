@@ -7,7 +7,7 @@ ENV FCREPO_DOWNLOAD_URL http://sourceforge.net/projects/fedora-commons/files/fed
 ENV JDBC_DRIVER_DOWNLOAD_URL http://jdbc.postgresql.org/download/postgresql-9.3-1103.jdbc4.jar 
 
 ## install packages
-RUN apt-get -yqq  update && apt-get -y install xmlstarlet && rm -rf /var/lib/apt/lists/*
+RUN apt-get -yqq  update && apt-get -y install xmlstarlet zip && rm -rf /var/lib/apt/lists/*
 
 
 
@@ -37,4 +37,15 @@ RUN xmlstarlet ed -L -N x="http://www.fedora.info/definitions/1/0/config/" \
   -u "//x:datastore[@id='localPostgresMPTTriplestore']/x:param[@name='jdbcURL']/@value" -v "jdbc:postgresql://riTriplesPostgres/riTriples" \
   $FEDORA_HOME/server/config/fedora.fcfg 
 
+# fix bad web.xml in fedora.war
+RUN unzip $CATALINA_HOME/webapps/fedora.war -d $CATALINA_HOME/webapps/fedora && rm -rf $CATALINA_HOME/webapps/fedora.war
+RUN sed -i.bak -e '216,219d' $CATALINA_HOME/webapps/fedora/WEB-INF/web.xml
+RUN zip -0 -r $CATALINA_HOME/webapps/fedora.war $CATALINA_HOME/webapps/fedora
+
+ENV JAAS_CONFIG $FEDORA_HOME/server/config/jaas.conf
+
+EXPOSE 8080
+ADD docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["catalina.sh", "run"]
 

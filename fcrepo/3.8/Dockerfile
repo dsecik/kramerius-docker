@@ -37,4 +37,10 @@ RUN xmlstarlet ed -L -N x="http://www.fedora.info/definitions/1/0/config/" \
   -u "//x:datastore[@id='localPostgresMPTTriplestore']/x:param[@name='jdbcURL']/@value" -v "jdbc:postgresql://riTriplesPostgres/riTriples" \
   $FEDORA_HOME/server/config/fedora.fcfg 
 
+ENV JAAS_CONFIG $FEDORA_HOME/server/config/jaas.conf
+
+EXPOSE 8080
+ADD docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["catalina.sh", "run"]
 

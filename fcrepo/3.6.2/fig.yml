@@ -1,9 +1,7 @@
 fcrepo:
   build: .
   volumes:
-    - /data/fcrepo:/kramerius-data/
-  ports:
-    - "8080:8080"
+    - /data/fcrepo:/usr/local/fedora/data
   links:
     - fedoraPostgres:fedoraPostgres
     - riTriplesPostgres:riTriplesPostgres
@@ -14,7 +12,7 @@ fedoraPostgres:
     - POSTGRES_PASSWORD=fedoraAdmin
     - POSTGRES_DB=fedora3
   volumes:
-    - /data/fedora/fedorapostgres:/var/lib/postgresql/data
+    - /data/fcrepo/fedorapostgres:/var/lib/postgresql/data
 riTriplesPostgres:
   image: "martinrumanek/postgres:9.3"
   environment:
@@ -22,4 +20,4 @@ riTriplesPostgres:
     - POSTGRES_PASSWORD=fedoraAdmin
     - POSTGRES_DB=riTriples
   volumes:
-    - /data/fedora/ritriplespostgres:/var/lib/postgresql/data
+    - /data/fcrepo/ritriplespostgres:/var/lib/postgresql/data
