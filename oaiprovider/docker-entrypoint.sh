@@ -7,4 +7,4 @@ sed -i -e "s|\${FEDORA_URL}|$FEDORA_URL|" \
        -e "s|\${FEDORA_JDBC_PASS}|$FEDORA_JDBC_PASS|" \
        "$CATALINA_HOME/webapps/oaiprovider/WEB-INF/classes/proai.properties"
 
-catalina.sh run
+exec "$@"

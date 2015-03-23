@@ -1,21 +1,74 @@
 oaiprovider:
-  image: moravianlibrary/oaiprovider
+  build: .
   ports:
-    - "8080:8080"
+    - "8002:8080"
   environment:
-    - FEDORA_URL=http://kramerius/fedora"
-    - FEDORA_USER=*
-    - FEDORA_PASS=*
-    - FEDORA_JDBC_URL=jdbc:postgresql://kramerius/riTriples
-    - FEDORA_JDBC_USER=*
-    - FEDORA_JDBC_PASS=*
+    - FEDORA_URL=http://fcrepo:8080/fedora
+    - FEDORA_USER=fedoraAdmin
+    - FEDORA_PASS=fedoraAdmin
+    - FEDORA_JDBC_URL=jdbc:postgresql://riTriplesPostgres/riTriples
+    - FEDORA_JDBC_USER=fedoraAdmin
+    - FEDORA_JDBC_PASS=fedoraAdmin
   links:
     - oaiproviderPostgres:oaiproviderPostgres
+    - fcrepo:fcrepo
+    - riTriplesPostgres:riTriplesPostgres
 oaiproviderPostgres:
-  image: "postgres:9.3"
+  image: "martinrumanek/postgres:9.3"
+  volumes:
+    - /data/oai:/var/lib/postgresql/data
   environment:
     - POSTGRES_USER=proai
     - POSTGRES_PASSWORD=proai
   ports:
-    - "5483:5483"
-
+    - "5483"
+kramerius:
+  build: ../kramerius
+  environment:
+    - VIRTUAL_HOST=docker.mzk.cz
+    - CATALINA_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000"
+  volumes:
+    - /data/kramerius/foxml-import:/data/foxml-import
+  ports:
+    - "8080:8080"
+    - "80:80"
+    - "8000:8000"
+    - "8001:8001"
+  links:
+    - fedoraPostgres:fedoraPostgres
+    - riTriplesPostgres:riTriplesPostgres
+    - krameriusPostgres:krameriusPostgres
+    - fcrepo:fcrepo
+fcrepo:
+  build: ../fcrepo/3.6.2/
+  volumes:
+    - /data/fcrepo/data:/usr/local/fedora/data
+  ports:
+    - "8080"
+  links:
+    - fedoraPostgres:fedoraPostgres
+    - riTriplesPostgres:riTriplesPostgres
+fedoraPostgres:
+  image: "martinrumanek/postgres:9.3"
+  environment:
+    - POSTGRES_USER=fedoraAdmin
+    - POSTGRES_PASSWORD=fedoraAdmin
+    - POSTGRES_DB=fedora3
+  volumes:
+    - /data/fcrepo/fedorapostgres:/var/lib/postgresql/data
+riTriplesPostgres:
+  image: "martinrumanek/postgres:9.3"
+  environment:
+    - POSTGRES_USER=fedoraAdmin
+    - POSTGRES_PASSWORD=fedoraAdmin
+    - POSTGRES_DB=riTriples
+  volumes:
+    - /data/fcrepo/ritriplespostgres:/var/lib/postgresql/data
+krameriusPostgres:
+  image: "martinrumanek/postgres:9.3"
+  environment:
+    - POSTGRES_USER=fedoraAdmin
+    - POSTGRES_PASSWORD=fedoraAdmin
+    - POSTGRES_DB=kramerius
+  volumes:
+    - /data/kramerius/postgres:/var/lib/postgresql/data
