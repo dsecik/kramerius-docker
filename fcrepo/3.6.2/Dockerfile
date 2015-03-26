@@ -39,6 +39,8 @@ RUN xmlstarlet ed -L -N x="http://www.fedora.info/definitions/1/0/config/" \
 
 ENV JAAS_CONFIG $FEDORA_HOME/server/config/jaas.conf
 
+ADD fedora-xacml-policies $FEDORA_HOME/data/fedora-xacml-policies
+
 EXPOSE 8080
 ADD docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]

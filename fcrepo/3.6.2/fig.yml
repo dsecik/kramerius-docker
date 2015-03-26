@@ -1,7 +1,9 @@
 fcrepo:
   build: .
   volumes:
-    - /data/fcrepo:/usr/local/fedora/data
+    - /data/fcrepo/datastreams:/usr/local/fedora/data/datastreams
+    - /data/fcrepo/objects:/usr/local/fedora/data/objects
+    - /data/fcrepo/resourceIndex:/usr/local/fedora/data/resourceIndex
   links:
     - fedoraPostgres:fedoraPostgres
     - riTriplesPostgres:riTriplesPostgres

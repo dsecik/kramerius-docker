@@ -24,9 +24,7 @@ solr:
 fcrepo:
   build: ../fcrepo/3.6.2/
   volumes:
-    - /data/fcrepo/datastreams:/usr/local/fedora/data/datastreams
-    - /data/fcrepo/objects:/usr/local/fedora/data/objects
-    - /data/fcrepo/resourceIndex:/usr/local/fedora/data/resourceIndex
+    - /data/fcrepo/data:/usr/local/fedora/data
   ports:
     - "8080"
   links:
@@ -83,4 +81,11 @@ iipsrv:
     - MAX_CVT=30000
     - MAX_LAYERS=10
     - MEMCACHED_SERVERS=memcached
+exampleimport:
+  build: .
+  volumes:
+    - /data/kramerius/foxml-import:/data/foxml-import
+    - /data/imageserver:/data/imageserver
+  links:
+    - kramerius:kramerius
 
