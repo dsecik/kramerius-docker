@@ -17,6 +17,8 @@ RUN wget --no-verbose https://github.com/ceskaexpedice/kramerius/releases/downlo
     unzip /tmp/kramerius.zip -d /tmp/ && \
     unzip /tmp/editors.zip -d /tmp/
 
+# temporary fix
+RUN wget http://ftp-devel.mzk.cz/kramerius/master/editor-5.1.0.war  -O /tmp/Editors-5.1.0/editor.war
 
 RUN mv /tmp/Editors-5.1.0/editor.war  $CATALINA_HOME/webapps/editor.war && \
     mv /tmp/Editors-5.1.0/rightseditor.war  $CATALINA_HOME/webapps/rightseditor.war && \
@@ -27,10 +29,11 @@ RUN mv /tmp/Editors-5.1.0/editor.war  $CATALINA_HOME/webapps/editor.war && \
 RUN curl -sL "$JDBC_DRIVER_DOWNLOAD_URL" -o $CATALINA_HOME/lib/postgresql-9.3-1103.jdbc4.jar
 ADD search.xml $CATALINA_HOME/conf/Catalina/localhost/search.xml
 ADD rightseditor.xml $CATALINA_HOME/conf/Catalina/localhost/rightseditor.xml
+ADD editor.xml $CATALINA_HOME/conf/Catalina/localhost/editor.xml
 
 # JAAS
-ENV JAAS_CONFIG $CATALINA_HOME/jaas.conf
-ADD jaas.conf $CATALINA_HOME/jaas.conf
+ENV JAAS_CONFIG $CATALINA_HOME/conf/jaas.config
+ADD jaas.conf $CATALINA_HOME/conf/jaas.config
 
 ENV SOLR_HOME /usr/local/solr
 ENV JAVA_OPTS -Djava.awt.headless=true -Dfile.encoding=UTF8 -XX:MaxPermSize=256m -Xms1024m -Xmx3072m  -Djava.security.auth.login.config=$JAAS_CONFIG -Dsolr.solr.home=$SOLR_HOME

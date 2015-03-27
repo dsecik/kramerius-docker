@@ -8,7 +8,7 @@ kramerius:
   ports:
     - "8080:8080"
     - "80:80"
-    - "8000:8000"
+   # - "8000:8000"
     - "8001:8001"
   links:
     - fedoraPostgres:fedoraPostgres
