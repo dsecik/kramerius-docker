@@ -2,7 +2,7 @@ FROM tomcat:8
 
 MAINTAINER Martin Rumanek <martin@rumanek.cz>
 
-ENV REFRESHED_AT 2014-03-24
+ENV REFRESHED_AT 2014-11-24
 ENV JDBC_DRIVER_DOWNLOAD_URL http://jdbc.postgresql.org/download/postgresql-9.3-1103.jdbc4.jar
 
 ## install packages
@@ -15,7 +15,8 @@ RUN wget --no-verbose https://github.com/ceskaexpedice/kramerius/releases/downlo
     wget --no-verbose https://github.com/ceskaexpedice/kramerius/releases/download/v5.1.0/Core-5.1.0.zip -O /tmp/kramerius.zip && \
     wget --no-verbose https://github.com/ceskaexpedice/kramerius/releases/download/v5.1.0/Editors-5.1.0.zip -O /tmp/editors.zip && \
     unzip /tmp/kramerius.zip -d /tmp/ && \
-    unzip /tmp/editors.zip -d /tmp/
+    unzip /tmp/editors.zip -d /tmp/ && \
+    unzip /tmp/installation.zip -d /tmp/
 
 # temporary fix
 RUN wget http://ftp-devel.mzk.cz/kramerius/master/editor-5.1.0.war  -O /tmp/Editors-5.1.0/editor.war
@@ -47,7 +48,7 @@ ADD lp.xml /root/.kramerius4/lp.xml
 
 ADD server.xml $CATALINA_HOME/conf/
 ADD rewrite.config $CATALINA_HOME/conf/Catalina/localhost/
-
+ADD tomcat-users.xml /tmp/tomcat-users.xml
 EXPOSE 8080
 ADD docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]

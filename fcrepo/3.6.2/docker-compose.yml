@@ -5,7 +5,7 @@ fcrepo:
     - /data/fcrepo/objects:/usr/local/fedora/data/objects
     - /data/fcrepo/resourceIndex:/usr/local/fedora/data/resourceIndex
   ports:
-    - "8080:8080"
+    - "8080"
   links:
     - fedoraPostgres:fedoraPostgres
     - riTriplesPostgres:riTriplesPostgres
