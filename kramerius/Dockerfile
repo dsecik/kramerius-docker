@@ -46,6 +46,10 @@ ADD configuration.properties /root/.kramerius4/configuration.properties
 ADD docker-entrypoint.sh /
 ADD lp.xml /root/.kramerius4/lp.xml
 
+# Increase Tomcat upload size limit
+RUN sed -i -e "s/52428800/524288000/" \
+     "$CATALINA_HOME//webapps/manager/WEB-INF/web.xml";
+
 ADD server.xml $CATALINA_HOME/conf/
 ADD rewrite.config $CATALINA_HOME/conf/Catalina/localhost/
 ADD tomcat-users.xml /tmp/tomcat-users.xml

@@ -1,5 +1,5 @@
 kramerius:
-  build: .
+  image: moravianlibrary/kramerius
   volumes:
     - /data/kramerius/foxml-import:/data/foxml-import
   ports:
@@ -9,10 +9,9 @@ kramerius:
   links:
     - krameriusPostgres:krameriusPostgres
     - imageserver:imageserver
-  external_links:
-    - 362_riTriplesPostgres_1:riTriplesPostgres
-    - 362_fcrepo_1:fcrepo
-    - solr_solr_1:solr
+    - riTriplesPostgres:riTriplesPostgres
+    - fcrepo:fcrepo
+    - solr:solr
 krameriusPostgres:
   image: "martinrumanek/postgres:9.3"
   environment:
@@ -48,4 +47,35 @@ iipsrv:
     - MAX_CVT=30000
     - MAX_LAYERS=10
     - MEMCACHED_SERVERS=memcached
+fcrepo:
+  image: moravianlibrary/fcrepo:3.6.2
+  volumes:
+    - /data/fcrepo/datastreams:/usr/local/fedora/data/datastreams
+    - /data/fcrepo/objects:/usr/local/fedora/data/objects
+    - /data/fcrepo/resourceIndex:/usr/local/fedora/data/resourceIndex
+  ports:
+    - "8080"
+  links:
+    - fedoraPostgres:fedoraPostgres
+    - riTriplesPostgres:riTriplesPostgres
+fedoraPostgres:
+  image: "martinrumanek/postgres:9.3"
+  environment:
+    - POSTGRES_USER=fedoraAdmin
+    - POSTGRES_PASSWORD=fedoraAdmin
+    - POSTGRES_DB=fedora3
+  volumes:
+    - /data/fcrepo/fedorapostgres:/var/lib/postgresql/data
+riTriplesPostgres:
+  image: "martinrumanek/postgres:9.3"
+  environment:
+    - POSTGRES_USER=fedoraAdmin
+    - POSTGRES_PASSWORD=fedoraAdmin
+    - POSTGRES_DB=riTriples
+  volumes:
+    - /data/fcrepo/ritriplespostgres:/var/lib/postgresql/data
+solr:
+  image: moravianlibrary/solr
+  ports:
+    - "8080"
 
