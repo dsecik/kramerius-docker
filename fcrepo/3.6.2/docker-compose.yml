@@ -4,6 +4,8 @@ fcrepo:
     - /data/fcrepo/datastreams:/usr/local/fedora/data/datastreams
     - /data/fcrepo/objects:/usr/local/fedora/data/objects
     - /data/fcrepo/resourceIndex:/usr/local/fedora/data/resourceIndex
+  environment:
+    - FEDORA_PASSWORD=fedoraAdmin
   ports:
     - "8080"
   links:

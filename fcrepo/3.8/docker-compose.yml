@@ -2,6 +2,8 @@ fcrepo:
   build: .
   volumes:
     - /data/fcrepo:/usr/local/fedora/data
+  environment:
+    - FEDORA_PASSWORD=fedoraAdmin
   ports:
     - "8080:8080"
   links:
