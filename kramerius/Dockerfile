@@ -40,9 +40,10 @@ ENV SOLR_HOME /usr/local/solr
 ENV JAVA_OPTS -Djava.awt.headless=true -Dfile.encoding=UTF8 -XX:MaxPermSize=256m -Xms1024m -Xmx3072m  -Djava.security.auth.login.config=$JAAS_CONFIG -Dsolr.solr.home=$SOLR_HOME
 
 
-ADD migration.properties /root/.kramerius4/migration.properties
-ADD indexer.properties /root/.kramerius4/indexer.properties
-ADD configuration.properties /root/.kramerius4/configuration.properties
+RUN mkdir /root/.kramerius4/
+ADD migration.properties /root/.kramerius4default/migration.properties
+ADD indexer.properties /root/.kramerius4default/indexer.properties
+ADD configuration.properties /root/.kramerius4default/configuration.properties
 ADD docker-entrypoint.sh /
 ADD lp.xml /root/.kramerius4/lp.xml
 
