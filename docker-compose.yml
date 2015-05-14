@@ -28,7 +28,7 @@ imageserver:
     - /data/logs:/logs
     - /etc/localtime:/etc/localtime
 memcached:
-  image: moravianlibrary/iipsrv-memcached
+  image: memcached
   command: memcached -u root -m 1024
 iipsrv:
   image: moravianlibrary/iipsrv-imageserver
