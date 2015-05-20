@@ -24,4 +24,5 @@ imageserver:
     - /etc/localtime:/etc/localtime
   links:
     - memcached:memcached
-
+  restart:
+    always
