@@ -3,50 +3,20 @@ kramerius:
   volumes:
     - /data/kramerius/foxml-import:/data/foxml-import
   ports:
-    - "8080:8080"
-  environment:
-    - TOMCAT_PASSWORD=tomcat
+    - "80:8080"
   links:
     - krameriusPostgres:krameriusPostgres
-    - imageserver:imageserver
     - riTriplesPostgres:riTriplesPostgres
     - fcrepo:fcrepo
     - solr:solr
 krameriusPostgres:
-  image: "martinrumanek/postgres:9.3"
+  image: "postgres:9.3"
   environment:
     - POSTGRES_USER=fedoraAdmin
     - POSTGRES_PASSWORD=fedoraAdmin
     - POSTGRES_DB=kramerius
   volumes:
     - /data/kramerius/postgres:/var/lib/postgresql/data
-imageserver:
-  image: moravianlibrary/iipsrv-nginx
-  links:
-    - iipsrv:imageserver
-  volumes:
-    - /data/logs:/logs
-    - /etc/localtime:/etc/localtime
-memcached:
-  image: memcached
-  command: memcached -u root -m 1024
-iipsrv:
-  image: moravianlibrary/iipsrv-imageserver
-  links:
-    - memcached:memcached
-  volumes:
-    - /data/imageserver:/data
-  environment:
-    - CHILDREN=6
-    - PORT=9000
-    - LOGFILE=/logs/iipsrv.log
-    - FILESYSTEM_PREFIX=/data/
-    - VERBOSITY=100
-    - JPEG_QUALITY=90
-    - MAX_IMAGE_CACHE_SIZE=10
-    - MAX_CVT=30000
-    - MAX_LAYERS=10
-    - MEMCACHED_SERVERS=memcached
 fcrepo:
   image: moravianlibrary/fcrepo:3.6.2
   volumes:
@@ -54,12 +24,12 @@ fcrepo:
     - /data/fcrepo/objects:/usr/local/fedora/data/objects
     - /data/fcrepo/resourceIndex:/usr/local/fedora/data/resourceIndex
   ports:
-    - "8080"
+    - "8080:8080"
   links:
     - fedoraPostgres:fedoraPostgres
     - riTriplesPostgres:riTriplesPostgres
 fedoraPostgres:
-  image: "martinrumanek/postgres:9.3"
+  image: "postgres:9.3"
   environment:
     - POSTGRES_USER=fedoraAdmin
     - POSTGRES_PASSWORD=fedoraAdmin
@@ -67,7 +37,7 @@ fedoraPostgres:
   volumes:
     - /data/fcrepo/fedorapostgres:/var/lib/postgresql/data
 riTriplesPostgres:
-  image: "martinrumanek/postgres:9.3"
+  image: "postgres:9.3"
   environment:
     - POSTGRES_USER=fedoraAdmin
     - POSTGRES_PASSWORD=fedoraAdmin
@@ -78,4 +48,5 @@ solr:
   image: moravianlibrary/solr
   ports:
     - "8080"
-
+  volumes:
+    - /data/solr:/usr/local/solr/data
