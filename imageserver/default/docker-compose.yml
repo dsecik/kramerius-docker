@@ -2,7 +2,6 @@ nginx:
   build: ./nginx
   volumes:
     - /home/secikd/data:/var/www/imageserver
-    - /etc/localtime:/etc/localtime
   links:
     - imageserver:imageserver
   ports:
@@ -12,8 +11,6 @@ nginx:
 
 memcached:
   image: memcached:1.4.24
-  volumes:
-    - /etc/localtime:/etc/localtime
   restart:
     always
 
@@ -21,7 +18,6 @@ imageserver:
   build: ./imageserver
   volumes:
     - /home/secikd/data:/data
-    - /etc/localtime:/etc/localtime
   links:
     - memcached:memcached
   restart:
