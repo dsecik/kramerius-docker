@@ -21,3 +21,5 @@ Tyto kontejnery je nutné za pomocí nástroje docker-compose spojit.
 vytvoříme soubor [docker-compose.yml](https://github.com/moravianlibrary/kramerius-docker/blob/master/docker-compose.yml)
 
 poté příkazem `docker-compose up -d`  pustíme.
+
+Konfigurace je popsaná [zde](https://github.com/moravianlibrary/kramerius-docker/wiki/Konfigurace-Krameria)
