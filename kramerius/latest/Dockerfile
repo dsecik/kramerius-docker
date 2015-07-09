@@ -2,7 +2,7 @@ FROM tomcat:8
 
 MAINTAINER Martin Rumanek <martin@rumanek.cz>
 
-ENV REFRESHED_AT 2014-11-24
+ENV REFRESHED_AT 2015-07-09
 ENV JDBC_DRIVER_DOWNLOAD_URL http://jdbc.postgresql.org/download/postgresql-9.3-1103.jdbc4.jar
 
 ## install packages
@@ -12,16 +12,14 @@ apt-get -y install wget unzip xmlstarlet curl less htop
 
 # download binaries
 RUN wget --no-verbose https://github.com/ceskaexpedice/kramerius/releases/download/v5.1.0/Installation-5.1.zip -O /tmp/installation.zip && \
-    wget --no-verbose http://ftp-devel.mzk.cz/kramerius/master/kramerius.zip -O /tmp/kramerius.zip && \
     wget --no-verbose https://github.com/ceskaexpedice/kramerius/releases/download/v5.1.0/Editors-5.1.0.zip -O /tmp/editors.zip && \
-    unzip /tmp/kramerius.zip -d /tmp/ && \
-    unzip /tmp/editors.zip -d /tmp/ && \
     unzip /tmp/installation.zip -d /tmp/
 
-RUN mv /tmp/kramerius/editor-5.1.0.war  $CATALINA_HOME/webapps/editor.war && \
-    mv /tmp/kramerius/rightseditor-5.1.0.war   $CATALINA_HOME/webapps/rightseditor.war && \
-    mv /tmp/kramerius/search.war  $CATALINA_HOME/webapps/search.war && \
-    mv /tmp/kramerius/*.jar  $CATALINA_HOME/lib/ 
+RUN curl -sL http://ftp-devel.mzk.cz/kramerius/master/kramerius/editor.war -o  $CATALINA_HOME/webapps/editor.war && \
+    curl -sL http://ftp-devel.mzk.cz/kramerius/master/kramerius/rightseditor-5.1.0.war -o  $CATALINA_HOME/webapps/rightseditor.war && \
+    curl -sL http://ftp-devel.mzk.cz/kramerius/master/kramerius/search.war -o  $CATALINA_HOME/webapps/search.war && \
+    curl -sL http://ftp-devel.mzk.cz/kramerius/master/kramerius/security-core.jar -o  $CATALINA_HOME/lib/security-core.jar && \
+    curl -sL http://ftp-devel.mzk.cz/kramerius/master/kramerius/client.war -o  $CATALINA_HOME/webapps/client.war
 
 
 RUN curl -sL "$JDBC_DRIVER_DOWNLOAD_URL" -o $CATALINA_HOME/lib/postgresql-9.3-1103.jdbc4.jar
