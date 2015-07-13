@@ -1,23 +1,21 @@
 nginx:
   build: ./nginx
   volumes:
-    - /home/secikd/data:/var/www/imageserver
+    - /data/imageserver:/var/www/imageserver
   links:
     - imageserver:imageserver
   ports:
     - "80:80"
   restart:
     always
-
 memcached:
   image: memcached:1.4.24
   restart:
     always
-
 imageserver:
   build: ./imageserver
   volumes:
-    - /home/secikd/data:/data
+    - /data/imageserver:/data
   links:
     - memcached:memcached
   restart:
