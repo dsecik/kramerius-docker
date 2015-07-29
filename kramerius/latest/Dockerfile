@@ -39,6 +39,8 @@ RUN mkdir /root/.kramerius4/
 ADD migration.properties /root/.kramerius4default/migration.properties
 ADD indexer.properties /root/.kramerius4default/indexer.properties
 ADD configuration.properties /root/.kramerius4default/configuration.properties
+ADD client.properties /root/.kramerius4default/client.properties
+
 ADD docker-entrypoint.sh /
 ADD lp.xml /root/.kramerius4/lp.xml
 

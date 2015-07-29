@@ -17,6 +17,11 @@ if [ ! -f /root/.kramerius4/indexer.properties ]; then
   cp /root/.kramerius4default/indexer.properties /root/.kramerius4/
 fi
 
+if [ ! -f /root/.kramerius4/client.properties ]; then
+  cp /root/.kramerius4default/client.properties /root/.kramerius4/
+fi
+
+
 
 #TODO only missing models
 function ingest2fedora {
