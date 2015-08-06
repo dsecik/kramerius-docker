@@ -1,5 +1,5 @@
 nginx:
-  build: ./nginx
+  image: moravianlibrary/iipsrv-nginx
   volumes:
     - /data/imageserver:/var/www/imageserver
   links:
@@ -13,7 +13,7 @@ memcached:
   restart:
     always
 imageserver:
-  build: ./imageserver
+  image: moravianlibrary/iipsrv-imageserver
   volumes:
     - /data/imageserver:/data
   links:

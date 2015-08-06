@@ -2,7 +2,7 @@ FROM tomcat:8
 
 MAINTAINER Martin Rumanek <martin@rumanek.cz>
 
-ENV REFRESHED_AT 2014-11-24
+ENV REFRESHED_AT 2014-07-29
 ENV JDBC_DRIVER_DOWNLOAD_URL http://jdbc.postgresql.org/download/postgresql-9.3-1103.jdbc4.jar
 
 ## install packages
@@ -19,7 +19,7 @@ RUN wget --no-verbose https://github.com/ceskaexpedice/kramerius/releases/downlo
     unzip /tmp/installation.zip -d /tmp/
 
 # temporary fix
-RUN wget http://ftp-devel.mzk.cz/kramerius/master/editor-5.1.0.war  -O /tmp/Editors-5.1.0/editor.war
+RUN wget http://ftp-devel.mzk.cz/kramerius/master/kramerius/editor.war  -O /tmp/Editors-5.1.0/editor.war
 
 RUN mv /tmp/Editors-5.1.0/editor.war  $CATALINA_HOME/webapps/editor.war && \
     mv /tmp/Editors-5.1.0/rightseditor.war  $CATALINA_HOME/webapps/rightseditor.war && \
