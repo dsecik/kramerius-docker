@@ -5,6 +5,8 @@ nginx:
     - /etc/localtime:/etc/localtime
   links:
     - imageserver:imageserver
+  environment:
+    - "TZ=Europe/Prague"
   ports:
     - "80:80"
   restart:
@@ -14,6 +16,8 @@ memcached:
   image: memcached:1.4.24
   volumes:
     - /etc/localtime:/etc/localtime
+  environment:
+    - "TZ=Europe/Prague"
   restart:
     always
 
@@ -22,6 +26,8 @@ imageserver:
   volumes:
     - /home/secikd/data:/data
     - /etc/localtime:/etc/localtime
+  environment:
+    - "TZ=Europe/Prague"
   links:
     - memcached:memcached
   restart:
