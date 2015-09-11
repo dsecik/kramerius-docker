@@ -4,19 +4,27 @@ nginx:
     - /data/imageserver:/var/www/imageserver
   links:
     - imageserver:imageserver
+  environment:
+    - "TZ=Europe/Prague"
   ports:
     - "80:80"
   restart:
     always
+
 memcached:
   image: memcached:1.4.24
+  environment:
+    - "TZ=Europe/Prague"
   restart:
     always
+
 imageserver:
   build: ./imageserver
   volumes:
     - /data/imageserver:/data
   links:
     - memcached:memcached
+  environment:
+    - "TZ=Europe/Prague"
   restart:
     always
