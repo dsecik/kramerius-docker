@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/moravianlibrary/kramerius-docker.png?label=ready&title=Ready)](https://waffle.io/moravianlibrary/kramerius-docker)
 # kramerius-docker
  Docker balíček pro Kramerius https://github.com/ceskaexpedice/kramerius a další balíčky s komponenty, nutnýni pro jeho běh
 
