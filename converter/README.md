@@ -4,6 +4,7 @@
 
 **Jpeg:**
 *docker run -d -v /some_directory/:/data moravianlibrary/converter /scripts/convertAllJpegs.sh*
+
 **Tif:**
 *docker run -d -v /some_directory/:/data moravianlibrary/converter /scripts/convertAllTifs.sh*
 
