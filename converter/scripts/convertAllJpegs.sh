@@ -2,11 +2,11 @@
 
 counter=0
 
-if [ $recursiveConversion == "true" ]
+if [ $RECURSIVE_CONVERSION == "true" ]
 then
-  if [[ $depthOfRecursion =~ ^[0-9]+$ ]]
+  if [[ $DEPTH_OF_CONVERSION =~ ^[0-9]+$ ]]
   then
-    depth="-maxdepth $depthOfRecursion"
+    depth="-maxdepth $DEPTH_OF_CONVERSION"
   else
     depth=""
   fi
