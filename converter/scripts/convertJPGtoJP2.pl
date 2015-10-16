@@ -10,7 +10,7 @@ my $outputFilePath = $ARGV[1];
 my $path = $ARGV[1];
 $path =~ s/[^\/]*$//;
 #my $pwd = cwd();
-my $tempFilesDir = "/data/convertTempFiles";
+my $tempFilesDir = "/tmp/convertTempFiles";
 my $tempFilePath = $tempFilesDir."/temp.tif";
 
 mkdir $tempFilesDir;
