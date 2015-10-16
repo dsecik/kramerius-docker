@@ -29,4 +29,6 @@ if [ -f /tmp/convertTempFiles/error.txt ]
 then
   cp /tmp/convertTempFiles/error.txt /data
   echo "Conversion of some files ended with error. See error.txt"
+else
+  echo "All $count files converted successfully."
 fi
