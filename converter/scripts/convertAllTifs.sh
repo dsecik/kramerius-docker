@@ -4,9 +4,9 @@ counter=0
 
 if [ $RECURSIVE_CONVERSION == "true" ]
 then
-  if [[ $DEPTH_OF_CONVERSION =~RE ^[0-9]+$ ]]
+  if [[ $DEPTH_OF_RECURSION =~RE ^[0-9]+$ ]]
   then
-    depth="-maxdepth $DEPTH_OF_CONVERSION"
+    depth="-maxdepth $DEPTH_OF_RECURSION"
   else
     depth=""
   fi
