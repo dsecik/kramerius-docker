@@ -1,17 +1,16 @@
 <html xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <head>
-    <script src="/reader/js/OpenLayers.js" type="text/javascript"></script>
-    <script>
-      function openlayers_init() {
-        var url = (document.URL.toString().indexOf(".jp2") > -1) ? document.URL.toString().replace(".jp2", "/") : document.URL.toString().concat("/");
-        init(url);
-      }
-    </script>
-  </head>
-  <body onload="openlayers_init();">
-    <div id="ol-wrapper">
-      <div id="ol-image">
-      </div>
-    </div>
-  </body>
+	<head>
+		<script src="reader/openseadragon-bin-2.0.0/openseadragon.min.js"></script>
+	</head>
+	<body>
+	<div id="openseadragon"/>
+		<script type="text/javascript">
+			var url = (document.URL.toString().indexOf(".jp2") > -1) ? document.URL.toString().replace(".jp2", "/info.json") : document.URL.toString().concat("/info.json");
+			var viewer = OpenSeadragon({
+				id: "openseadragon",
+				prefixUrl: "reader/openseadragon-bin-2.0.0/images/",
+				tileSources: url
+			});
+		</script>
+	</body>
 </html>

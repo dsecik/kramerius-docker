@@ -1,7 +1,5 @@
 nginx:
   build: ./nginx
-  volumes:
-    - /data/imageserver:/var/www/imageserver
   links:
     - imageserver:imageserver
   environment:

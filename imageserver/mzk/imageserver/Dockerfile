@@ -1,7 +1,7 @@
-FROM debian:wheezy
+FROM debian:jessie
 
-RUN apt-get update && apt-get install -y libc6 libfcgi0ldbl libgcc1 libjpeg8 libmemcached10 libstdc++6 libtiff5 libapache2-mod-fcgid lighttpd jiipview iipimage-doc memcached imagemagick libvips-tools wget nano && rm -rf /var/lib/apt/lists/*
-RUN wget --no-verbose  http://downloads.klokantech.com/iiifserver/iiifserver-1.0.0.debian-wheezy.amd64.deb && dpkg -i  iiifserver-1.0.0.debian-wheezy.amd64.deb && rm iiifserver-1.0.0.debian-wheezy.amd64.deb
+RUN apt-get update && apt-get install -y libjpeg62 libtiff5 libgomp1 libmemcached11 lighttpd wget nano && rm -rf /var/lib/apt/lists/*
+RUN wget --no-verbose http://ftp-devel.mzk.cz/imageserver/iipimage-jp2-amd64.deb && dpkg -i iipimage-jp2-amd64.deb && rm iipimage-jp2-amd64.deb
 
 ENV LOGFILE=/var/log/iipsrv/iipsrv.log
 ENV CHILDREN=6

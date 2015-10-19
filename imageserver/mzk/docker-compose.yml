@@ -1,8 +1,7 @@
 nginx:
   build: ./nginx
   volumes:
-    - /home/secikd/data:/var/www/imageserver/data
-    - /etc/localtime:/etc/localtime
+    - /data/imageserver:/var/www/imageserver/data
   links:
     - imageserver:imageserver
   environment:
@@ -14,8 +13,6 @@ nginx:
 
 memcached:
   image: memcached:1.4.24
-  volumes:
-    - /etc/localtime:/etc/localtime
   environment:
     - "TZ=Europe/Prague"
   restart:
@@ -24,8 +21,7 @@ memcached:
 imageserver:
   build: ./imageserver
   volumes:
-    - /home/secikd/data:/data
-    - /etc/localtime:/etc/localtime
+    - /data/imageserver:/data
   environment:
     - "TZ=Europe/Prague"
   links:
