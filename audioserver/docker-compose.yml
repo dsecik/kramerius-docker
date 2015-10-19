@@ -1,0 +1,10 @@
+audioserver:
+  build: .
+  volumes:
+    - /data/audioserver:/data
+  environment:
+    - "TZ=Europe/Prague"
+  ports:
+    - "80:80"
+  restart:
+    always
