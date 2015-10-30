@@ -1,10 +1,7 @@
-FROM gliderlabs/alpine:3.1
-VOLUME /mnt/routes
-EXPOSE 8000
+FROM gliderlabs/logspout:latest
 
-ENV GOPATH /go
-RUN apk-install go git mercurial
-COPY . /go/src/github.com/gliderlabs/logspout
-WORKDIR /go/src/github.com/gliderlabs/logspout
-RUN go get && go build -ldflags "-X main.Version dev" -o /bin/logspout
-ENTRYPOINT ["/bin/logspout"]
+RUN apk update
+RUN apk add tzdata
+RUN cp /usr/share/zoneinfo/Europe/Prague /etc/localtime
+RUN echo "Europe/Prague" >  /etc/timezone
+RUN apk del tzdata
