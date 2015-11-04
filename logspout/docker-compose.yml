@@ -1,0 +1,9 @@
+logspout:
+  image: moravianlibrary/logspout:latest
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+  environment:
+    - "TZ=Europe/Prague"
+  command: syslog://<logstash-url>:5000
+  restart: always
+

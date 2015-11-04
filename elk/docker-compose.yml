@@ -1,0 +1,46 @@
+elasticsearch:
+  image: elasticsearch:latest
+  command: elasticsearch -Des.network.host=0.0.0.0
+  environment:
+    - "TZ=Europe/Prague"
+  restart:
+    always
+
+logstash:
+  image: logstash:latest
+  volumes:
+    - ./logstash-config:/config-dir
+  command: logstash -f /config-dir/logstash.conf
+  ports:
+    - "5000:5000"
+    - "5000:5000/udp"
+  links:
+    - elasticsearch:elasticsearch
+  environment:
+    - "LOGSPOUT=ignore"
+    - "TZ=Europe/Prague"
+  restart:
+    always
+
+kibana:
+  image: kibana:latest
+  links:
+    - elasticsearch:elasticsearch
+  ports:
+    - "80:5601"
+  environment:
+    - "TZ=Europe/Prague"
+  restart:
+    always
+
+logspout:
+  image: moravianlibrary/logspout:latest
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+  environment:
+    - "TZ=Europe/Prague"
+  links:
+    - logstash:logstash
+  command: syslog://logstash:5000
+  restart: always
+
