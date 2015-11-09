@@ -1,5 +1,7 @@
 elasticsearch:
   image: elasticsearch:latest
+  volumes:
+    - <data-location>:/usr/share/elasticsearch/data
   command: elasticsearch -Des.network.host=0.0.0.0
   environment:
     - "TZ=Europe/Prague"
