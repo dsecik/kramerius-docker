@@ -127,6 +127,12 @@
              Documentation at: /docs/config/valve.html -->
         <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
 
+        <!-- x-forwarded (because reverse proxy) -->
+        <Valve className="org.apache.catalina.valves.RemoteIpValve"
+           remoteIpHeader="x-forwarded-for"
+           remoteIpProxiesHeader="x-forwarded-by"
+           protocolHeader="x-forwarded-proto"
+        />
         <!-- Access log processes all example.
              Documentation at: /docs/config/valve.html
              Note: The pattern used is equivalent to using pattern="common" -->
