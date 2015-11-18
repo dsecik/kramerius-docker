@@ -10,16 +10,14 @@ RUN apt-get -y  update && \
 apt-get -y install wget unzip xmlstarlet curl less htop
 
 
-# download binaries
-RUN wget --no-verbose https://github.com/ceskaexpedice/kramerius/releases/download/v5.1.0/Installation-5.1.zip -O /tmp/installation.zip && \
-    wget --no-verbose https://github.com/ceskaexpedice/kramerius/releases/download/v5.1.0/Editors-5.1.0.zip -O /tmp/editors.zip && \
-    unzip /tmp/installation.zip -d /tmp/
+RUN cd /tmp && \
+    wget --no-verbose https://github.com/ceskaexpedice/kramerius/releases/download/v5.1.0/Editors-5.1.0.zip && \
+    wget --no-verbose https://github.com/ceskaexpedice/kramerius/releases/download/v5.1.0/Installation-5.1.zip && \
+    unzip -j Editors-5.1.0.zip Editors-5.1.0/editor.war Editors-5.1.0/rightseditor.war -d $CATALINA_HOME/webapps/
 
-RUN curl -sL http://ftp-devel.mzk.cz/kramerius/devel/kramerius/editor.war -o  $CATALINA_HOME/webapps/editor.war && \
-    curl -sL http://ftp-devel.mzk.cz/kramerius/devel/kramerius/rightseditor-5.1.0.war -o  $CATALINA_HOME/webapps/rightseditor.war && \
-    curl -sL http://ftp-devel.mzk.cz/kramerius/devel/kramerius/search.war -o  $CATALINA_HOME/webapps/search.war && \
-    curl -sL http://ftp-devel.mzk.cz/kramerius/devel/kramerius/security-core.jar -o  $CATALINA_HOME/lib/security-core.jar && \
-    curl -sL http://ftp-devel.mzk.cz/kramerius/devel/kramerius/client.war -o  $CATALINA_HOME/webapps/client.war
+RUN curl -sL http://ftp-devel.mzk.cz/kramerius/devel/search.war -o $CATALINA_HOME/webapps/search.war && \
+    curl -sL http://ftp-devel.mzk.cz/kramerius/devel/security-core.jar -o $CATALINA_HOME/lib/security-core.jar && \
+    curl -sL http://ftp-devel.mzk.cz/kramerius/devel/client.war -o $CATALINA_HOME/webapps/client.war
 
 
 RUN curl -sL "$JDBC_DRIVER_DOWNLOAD_URL" -o $CATALINA_HOME/lib/postgresql-9.3-1103.jdbc4.jar
