@@ -13,7 +13,7 @@ apt-get -y install wget unzip xmlstarlet curl less htop
 RUN cd /tmp && \
     wget --no-verbose https://github.com/ceskaexpedice/kramerius/releases/download/v5.1.0/Editors-5.1.0.zip && \
     wget --no-verbose https://github.com/ceskaexpedice/kramerius/releases/download/v5.1.0/Installation-5.1.zip && \
-    unzip -j Editors-5.1.0.zip Editors-5.1.0/editor.war Editors-5.1.0/rightseditor.war -d $CATALINA_HOME/webapps/
+    unzip -j Editors-5.1.0.zip Editors-5.1.0/editor.war Editors-5.1.0/rightseditor.war -d $CATALINA_HOME/webapps/ && \
     unzip -j Installation-5.1.zip Installation-5.1/fedora/* -d /tmp/fedora
 
 RUN curl -sL http://ftp-devel.mzk.cz/kramerius/devel/search.war -o $CATALINA_HOME/webapps/search.war && \
