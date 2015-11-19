@@ -32,7 +32,7 @@ function ingest2fedora {
 #TODO better wait to fedora starts...
 sleep 10
 echo "ingesting fedora models"
-MODELS=/tmp/Installation-5.1/fedora/*.xml
+MODELS=/tmp/fedora/*.xml
 for MODEL in $MODELS
 do
   ingest2fedora $MODEL
