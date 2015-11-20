@@ -25,7 +25,7 @@ if [ ! -d "/kramerius-data/.kramerius4" ]; then
 fi
 
 if [ -d "/kramerius-data/.kramerius4" ]; then
-  FEDORA_PASSWORD=$(/parser.sh fedoraPass /kramerius-data/.kramerius4/configuration.properties)
+  FEDORA_PASSWORD=$(parser.sh fedoraPass /kramerius-data/.kramerius4/configuration.properties)
   xmlstarlet ed -u "/users/user/@password" -v $FEDORA_PASSWORD /home/kramerius/fedora/server/config/fedora-users.xml > fedora-users.xml
   mv fedora-users.xml /home/kramerius/fedora/server/config/fedora-users.xml
 fi
