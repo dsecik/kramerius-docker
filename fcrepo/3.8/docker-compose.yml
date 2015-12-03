@@ -10,7 +10,7 @@ fcrepo:
     - fedoraPostgres:fedoraPostgres
     - riTriplesPostgres:riTriplesPostgres
 fedoraPostgres:
-  image: "martinrumanek/postgres:9.3"
+  image: "postgres:9.3"
   environment:
     - POSTGRES_USER=fedoraAdmin
     - POSTGRES_PASSWORD=fedoraAdmin
@@ -18,7 +18,7 @@ fedoraPostgres:
   volumes:
     - /data/fcrepo/fedorapostgres:/var/lib/postgresql/data
 riTriplesPostgres:
-  image: "martinrumanek/postgres:9.3"
+  image: "postgres:9.3"
   environment:
     - POSTGRES_USER=fedoraAdmin
     - POSTGRES_PASSWORD=fedoraAdmin
