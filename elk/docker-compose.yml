@@ -46,3 +46,14 @@ logspout:
   command: syslog://logstash:5000
   restart: always
 
+curator:
+  image: moravianlibrary/curator:latest
+  volumes:
+    - ./curator/crontab:/etc/cron.d/curator
+  environment:
+    - "TZ=Europe/Prague"
+  links:
+    - elasticsearch:elasticsearch
+  command: bash -c "cron && touch /var/log/curator_cron.log && tail -f /var/log/curator_cron.log"
+  restart:
+    always
