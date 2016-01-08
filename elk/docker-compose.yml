@@ -51,8 +51,6 @@ logspout:
   image: moravianlibrary/logspout:latest
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock
-  environment:
-    - "TZ=Europe/Prague"
   links:
     - logstash:logstash
   command: syslog://logstash:5000
