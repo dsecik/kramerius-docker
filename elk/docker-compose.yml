@@ -37,7 +37,7 @@ kibana:
   links:
     - elasticsearch:elasticsearch
   ports:
-    - "80:5601"
+    - "5601:5601"
   environment:
     - "TZ=Europe/Prague"
   log_driver: "json-file"
