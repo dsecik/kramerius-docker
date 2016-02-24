@@ -16,7 +16,7 @@ nginx:
     always
 
 memcached:
-  image: memcached:1.4.24
+  image: memcached:latest
   environment:
     - "TZ=Europe/Prague"
   log_driver: "json-file"

@@ -1,9 +1,14 @@
 FROM debian:jessie
 
-RUN apt-get update && apt-get install -y libjpeg62 libtiff5 libgomp1 libmemcached11 lighttpd wget nano && rm -rf /var/lib/apt/lists/*
-RUN wget --no-verbose http://ftp-devel.mzk.cz/imageserver/iipimage-jp2-amd64.deb && dpkg -i iipimage-jp2-amd64.deb && rm iipimage-jp2-amd64.deb
 
-ENV LOGFILE=/var/log/iipsrv/iipsrv.log
+RUN apt-get update && apt-get install -y libjpeg-turbo-progs libpng12-0 libtiff5 libgomp1 libmemcached11 spawn-fcgi wget nano \
+&& rm -rf /var/lib/apt/lists/*
+
+RUN wget --no-verbose --no-check-certificate -O iiifserver.deb 'http://downloads.klokantech.com/iiifserver/iiifserver-1.0.0-165.debian-jessie.amd64.deb' \
+&& dpkg -i iiifserver.deb \
+&& rm iiifserver.deb
+
+ENV LOGFILE=/tmp/iipsrv.log
 ENV CHILDREN=6
 ENV PORT=9000
 ENV FILESYSTEM_PREFIX=/data/
@@ -13,9 +18,6 @@ ENV MAX_IMAGE_CACHE_SIZE=10
 ENV MAX_CVT=30000
 ENV MAX_LAYERS=10
 ENV MEMCACHED_SERVERS=memcached
-
-RUN mkdir -p /var/log/iipsrv
-RUN touch /var/log/iipsrv/iipsrv.log
 
 ADD init.sh /init.sh
 
