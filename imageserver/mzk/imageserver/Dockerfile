@@ -4,9 +4,9 @@ FROM debian:jessie
 RUN apt-get update && apt-get install -y libjpeg-turbo-progs libpng12-0 libtiff5 libgomp1 libmemcached11 spawn-fcgi wget nano \
 && rm -rf /var/lib/apt/lists/*
 
-RUN wget --no-verbose --no-check-certificate -O iiifserver.deb 'http://downloads.klokantech.com/iiifserver/iiifserver-1.0.0-165.debian-jessie.amd64.deb' \
-&& dpkg -i iiifserver.deb \
-&& rm iiifserver.deb
+RUN wget --no-verbose -O iipimage.deb http://ftp-devel.mzk.cz/imageserver/iipimage-jp2-amd64.deb \
+&& dpkg -i iipimage.deb \
+&& rm iipimage.deb
 
 ENV LOGFILE=/tmp/iipsrv.log
 ENV CHILDREN=6
