@@ -9,7 +9,7 @@ nginx:
   restart:
     always
 memcached:
-  image: memcached:1.4.24
+  image: memcached:latest
   restart:
     always
 imageserver:

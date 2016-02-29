@@ -8,13 +8,21 @@ nginx:
     - "TZ=Europe/Prague"
   ports:
     - "80:80"
+  log_driver: "json-file"
+  log_opt:
+    max-size: "100m"
+    max-file: "1"
   restart:
     always
 
 memcached:
-  image: memcached:1.4.24
+  image: memcached:latest
   environment:
     - "TZ=Europe/Prague"
+  log_driver: "json-file"
+  log_opt:
+    max-size: "100m"
+    max-file: "1"
   restart:
     always
 
@@ -26,5 +34,9 @@ imageserver:
     - "TZ=Europe/Prague"
   links:
     - memcached:memcached
+  log_driver: "json-file"
+  log_opt:
+    max-size: "100m"
+    max-file: "1"
   restart:
     always
