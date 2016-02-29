@@ -55,6 +55,16 @@ RUN sed -i -e "s/52428800/524288000/" \
 ADD server.xml $CATALINA_HOME/conf/
 ADD rewrite.config $CATALINA_HOME/conf/Catalina/localhost/
 ADD tomcat-users.xml /tmp/tomcat-users.xml
+
+ENV TOMCAT_USER tomcat
+ENV TOMCAT_UID 8983
+RUN groupadd -r $TOMCAT_USER && \
+  useradd -r -u $TOMCAT_UID -g $TOMCAT_USER $TOMCAT_USER
+RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $CATALINA_HOME
+RUN chmod -R ugo+rwX $CATALINA_HOME
+USER $TOMCAT_USER
+
+
 EXPOSE 8080
 ADD docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
