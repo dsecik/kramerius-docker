@@ -39,6 +39,14 @@ RUN xmlstarlet ed -L -N x="http://www.fedora.info/definitions/1/0/config/" \
 
 ENV JAAS_CONFIG $FEDORA_HOME/server/config/jaas.conf
 
+ENV TOMCAT_USER tomcat
+ENV TOMCAT_UID 8983
+RUN groupadd -r $TOMCAT_USER && \
+  useradd -r -u $TOMCAT_UID -g $TOMCAT_USER $TOMCAT_USER
+RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $CATALINA_HOME
+RUN chmod -R ugo+rwX $CATALINA_HOME
+USER $TOMCAT_USER
+
 EXPOSE 8080
 ADD docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
