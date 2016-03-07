@@ -37,6 +37,8 @@ RUN xmlstarlet ed -L -N x="http://www.fedora.info/definitions/1/0/config/" \
   -u "//x:datastore[@id='localPostgresMPTTriplestore']/x:param[@name='jdbcURL']/@value" -v "jdbc:postgresql://riTriplesPostgres/riTriples" \
   $FEDORA_HOME/server/config/fedora.fcfg 
 
+ADD logback.xml $FEDORA_HOME/server/config/logback.xml
+
 ENV JAAS_CONFIG $FEDORA_HOME/server/config/jaas.conf
 
 ENV TOMCAT_USER tomcat
@@ -45,6 +47,9 @@ RUN groupadd -r $TOMCAT_USER && \
   useradd -r -u $TOMCAT_UID -g $TOMCAT_USER $TOMCAT_USER
 RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $CATALINA_HOME
 RUN chmod -R ugo+rwX $CATALINA_HOME
+RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $FEDORA_HOME
+RUN chmod -R ugo+rwX $FEDORA_HOME
+
 USER $TOMCAT_USER
 
 EXPOSE 8080

@@ -1,7 +1,7 @@
 fcrepo:
   build: .
-  volumes:
-    - /data/fcrepo:/usr/local/fedora/data
+  #volumes:
+  #  - /data/fcrepo:/usr/local/fedora/data
   environment:
     - FEDORA_PASSWORD=fedoraAdmin
   ports:
@@ -15,13 +15,13 @@ fedoraPostgres:
     - POSTGRES_USER=fedoraAdmin
     - POSTGRES_PASSWORD=fedoraAdmin
     - POSTGRES_DB=fedora3
-  volumes:
-    - /data/fcrepo/fedorapostgres:/var/lib/postgresql/data
+  #volumes:
+  #  - /data/fcrepo/fedorapostgres:/var/lib/postgresql/data
 riTriplesPostgres:
   image: "postgres:9.3"
   environment:
     - POSTGRES_USER=fedoraAdmin
     - POSTGRES_PASSWORD=fedoraAdmin
     - POSTGRES_DB=riTriples
-  volumes:
-    - /data/fcrepo/ritriplespostgres:/var/lib/postgresql/data
+  #volumes:
+  #  - /data/fcrepo/ritriplespostgres:/var/lib/postgresql/data
