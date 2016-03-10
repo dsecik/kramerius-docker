@@ -37,7 +37,7 @@ RUN xmlstarlet ed -L -N x="http://www.fedora.info/definitions/1/0/config/" \
   -u "//x:datastore[@id='localPostgresMPTTriplestore']/x:param[@name='jdbcURL']/@value" -v "jdbc:postgresql://riTriplesPostgres/riTriples" \
   $FEDORA_HOME/server/config/fedora.fcfg 
 
-ADD logback.xml $FEDORA_HOME/server/config/logback.xml
+#ADD logback.xml $FEDORA_HOME/server/config/logback.xml
 
 ENV JAAS_CONFIG $FEDORA_HOME/server/config/jaas.conf
 
