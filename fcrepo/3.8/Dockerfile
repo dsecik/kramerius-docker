@@ -8,20 +8,20 @@ ENV JDBC_DRIVER_DOWNLOAD_URL http://jdbc.postgresql.org/download/postgresql-9.3-
 #
 ### install packages
 RUN apt-get -yqq  update && apt-get -y install xmlstarlet && rm -rf /var/lib/apt/lists/*
-#
-#
-#
+
+
+
 WORKDIR $CATALINA_HOME
 RUN curl -sL "$JDBC_DRIVER_DOWNLOAD_URL" -o lib/postgresql-9.3-1103.jdbc4.jar
-#
+
 ENV FEDORA_HOME /usr/local/fedora
-#
+
 ### install fedora
 ADD fedora-install.properties /tmp/fedora-install.properties
 RUN  curl -sL  "$FCREPO_DOWNLOAD_URL" -o fedora-install.jar && \
      java -jar fedora-install.jar /tmp/fedora-install.properties
-#
-#
+
+
 #RUN xmlstarlet ed -L -N x="http://www.fedora.info/definitions/1/0/config/" \
 #  -s "//x:module[@role='org.fcrepo.server.resourceIndex.ResourceIndex']" -t elem -n "paramKrameriusTMP" -v "" \
 #  -s "//x:module[@role='org.fcrepo.server.resourceIndex.ResourceIndex']" -t elem -n "paramOAITMP" -v "" \
@@ -48,7 +48,7 @@ RUN groupadd -r $TOMCAT_USER && \
 #RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $CATALINA_HOME
 RUN chmod -R ugo+rwX $CATALINA_HOME
 #RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $FEDORA_HOME
-#RUN chmod -R ugo+rwX $FEDORA_HOME
+RUN chmod -R ugo+rwX $FEDORA_HOME
 
 USER $TOMCAT_USER
 
