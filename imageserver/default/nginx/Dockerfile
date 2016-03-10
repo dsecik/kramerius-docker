@@ -1,5 +1,8 @@
 FROM debian:jessie
 
+ENV NGINX_VERSION 1.9.12-1~jessie
+MAINTAINER Daniel Secik "daniel.secik@mzk.cz"
+
 RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
 RUN chmod -R ugo+rwx /var/ && chmod -R ugo+rwx /run/
 
