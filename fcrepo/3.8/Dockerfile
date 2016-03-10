@@ -2,22 +2,22 @@ FROM tomcat:8
 
 MAINTAINER Martin Rumanek <martin@rumanek.cz>
 
-#ENV REFRESHED_AT 2014-3-20
-#ENV FCREPO_DOWNLOAD_URL http://downloads.sourceforge.net/fedora-commons/fcrepo-installer-3.8.0.jar
-#ENV JDBC_DRIVER_DOWNLOAD_URL http://jdbc.postgresql.org/download/postgresql-9.3-1103.jdbc4.jar 
+ENV REFRESHED_AT 2014-3-20
+ENV FCREPO_DOWNLOAD_URL http://downloads.sourceforge.net/fedora-commons/fcrepo-installer-3.8.0.jar
+ENV JDBC_DRIVER_DOWNLOAD_URL http://jdbc.postgresql.org/download/postgresql-9.3-1103.jdbc4.jar 
 #
 ### install packages
-#RUN apt-get -yqq  update && apt-get -y install xmlstarlet && rm -rf /var/lib/apt/lists/*
+RUN apt-get -yqq  update && apt-get -y install xmlstarlet && rm -rf /var/lib/apt/lists/*
 #
 #
 #
-#WORKDIR $CATALINA_HOME
-#RUN curl -sL "$JDBC_DRIVER_DOWNLOAD_URL" -o lib/postgresql-9.3-1103.jdbc4.jar
+WORKDIR $CATALINA_HOME
+RUN curl -sL "$JDBC_DRIVER_DOWNLOAD_URL" -o lib/postgresql-9.3-1103.jdbc4.jar
 #
 #ENV FEDORA_HOME /usr/local/fedora
 #
 ### install fedora
-#ADD fedora-install.properties /tmp/fedora-install.properties
+ADD fedora-install.properties /tmp/fedora-install.properties
 #RUN  curl -sL  "$FCREPO_DOWNLOAD_URL" -o fedora-install.jar && \
 #     java -jar fedora-install.jar /tmp/fedora-install.properties
 #
