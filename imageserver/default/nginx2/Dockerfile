@@ -7,4 +7,3 @@ EXPOSE 8080
 
 ADD nginx.conf /etc/nginx/conf.d/default.conf 
 
-CMD ["sleep", "10000"]
