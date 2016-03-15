@@ -8,7 +8,7 @@ RUN wget --no-verbose -O iipimage.deb http://ftp-devel.mzk.cz/imageserver/iipima
 && rm iipimage.deb
 
 ENV LOGFILE=/tmp/iipsrv.log
-ENV CHILDREN=6
+ENV CHILDREN=1
 ENV PORT=9000
 ENV FILESYSTEM_PREFIX=/data/
 ENV VERBOSITY=100
