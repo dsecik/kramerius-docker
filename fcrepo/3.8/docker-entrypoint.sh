@@ -6,7 +6,7 @@ fi
 
 if [ -n "$RITRIPLES_DB_HOST" ] && [ -n "$RITRIPLES_DB_NAME" ] ; then
 xmlstarlet ed -L -N x="http://www.fedora.info/definitions/1/0/config/" \
-  -u "//x:datastore[@id='localPostgresMPTTriplestore']/x:param[@name='jdbcURL']/@value" -v "jdbc:postgresql://$RITRIPLES_DB_HOST/$RITRIPLES_DB_NAME" \
+  -u "//x:datastore[@id='localPostgresMPTTriplestore']/x:param[@name='jdbcURL']/@value" -v "jdbc:postgresql://$RITRIPLES_DB_HOST:5432/$RITRIPLES_DB_NAME" \
   $FEDORA_HOME/server/config/fedora.fcfg
 fi
 
