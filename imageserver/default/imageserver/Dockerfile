@@ -18,6 +18,7 @@ ENV MAX_CVT=30000
 ENV MAX_LAYERS=10
 ENV MEMCACHED_SERVERS=memcached
 
+EXPOSE 9000
 ADD init.sh /init.sh
 
 CMD /init.sh
