@@ -3,7 +3,7 @@ FROM debian:jessie
 RUN apt-get update && apt-get install -y libjpeg-turbo-progs libpng12-0 libtiff5 libgomp1 libmemcached11 spawn-fcgi wget nano \
 && rm -rf /var/lib/apt/lists/*
 
-RUN wget --no-verbose -O iipimage.deb http://ftp-devel.mzk.cz/imageserver/iipimage-jp2-amd64.deb \
+RUN wget --no-verbose -O iipimage.deb http://ftp-devel.mzk.cz/imageserver/iipimage-jp2-amd64-1.0.deb \
 && dpkg -i iipimage.deb \
 && rm iipimage.deb
 
