@@ -7,7 +7,7 @@ ENV FCREPO_DOWNLOAD_URL http://downloads.sourceforge.net/fedora-commons/fcrepo-i
 ENV JDBC_DRIVER_DOWNLOAD_URL http://jdbc.postgresql.org/download/postgresql-9.3-1103.jdbc4.jar 
 #
 ### install packages
-RUN apt-get -yqq  update && apt-get -y install xmlstarlet && rm -rf /var/lib/apt/lists/*
+RUN apt-get -yqq  update && apt-get -y install xmlstarlet telnet && rm -rf /var/lib/apt/lists/
 
 
 
