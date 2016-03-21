@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:8.0
 
 RUN apt-get update && apt-get install -y libjpeg-turbo-progs libpng12-0 libtiff5 libgomp1 libmemcached11 spawn-fcgi wget nano \
 && rm -rf /var/lib/apt/lists/*
