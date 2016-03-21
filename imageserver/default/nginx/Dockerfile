@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:8.0
 
 MAINTAINER Daniel Secik "daniel.secik@mzk.cz"
 ENV NGINX_VERSION 1.9.12-1~jessie
