@@ -21,7 +21,7 @@ RUN groupadd -r $TOMCAT_USER && \
 #RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $CATALINA_HOME
 RUN chmod -R ugo+rwx $CATALINA_HOME
 #RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $FEDORA_HOME
-RUN chmod -R ugo+rwx $FEDORA_HOME
+RUN chmod -R ugo+rwx $SOLR_HOME
 
 USER $TOMCAT_USER
 
