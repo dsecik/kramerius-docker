@@ -1,13 +1,13 @@
-FROM tomcat:8
+FROM tomcat:8.0
 
 MAINTAINER Martin Rumanek <martin@rumanek.cz>
 
 ENV REFRESHED_AT 2014-3-20
 ENV FCREPO_DOWNLOAD_URL http://downloads.sourceforge.net/fedora-commons/fcrepo-installer-3.8.0.jar
 ENV JDBC_DRIVER_DOWNLOAD_URL http://jdbc.postgresql.org/download/postgresql-9.3-1103.jdbc4.jar 
-
-## install packages
-RUN apt-get -yqq  update && apt-get -y install xmlstarlet && rm -rf /var/lib/apt/lists/*
+#
+### install packages
+RUN apt-get -yqq  update && apt-get -y install xmlstarlet telnet && rm -rf /var/lib/apt/lists/
 
 
 
@@ -16,7 +16,7 @@ RUN curl -sL "$JDBC_DRIVER_DOWNLOAD_URL" -o lib/postgresql-9.3-1103.jdbc4.jar
 
 ENV FEDORA_HOME /usr/local/fedora
 
-## install fedora
+### install fedora
 ADD fedora-install.properties /tmp/fedora-install.properties
 RUN  curl -sL  "$FCREPO_DOWNLOAD_URL" -o fedora-install.jar && \
      java -jar fedora-install.jar /tmp/fedora-install.properties
@@ -36,24 +36,24 @@ RUN xmlstarlet ed -L -N x="http://www.fedora.info/definitions/1/0/config/" \
   -u "//x:module[@role='org.fcrepo.server.resourceIndex.ResourceIndex']/x:param[@name='datastore']/@value" -v "localPostgresMPTTriplestore" \
   -u "//x:datastore[@id='localPostgresMPTTriplestore']/x:param[@name='jdbcURL']/@value" -v "jdbc:postgresql://riTriplesPostgres/riTriples" \
   $FEDORA_HOME/server/config/fedora.fcfg 
-
+#
 ADD logback.xml $FEDORA_HOME/server/config/logback.xml
-
+#
 ENV JAAS_CONFIG $FEDORA_HOME/server/config/jaas.conf
 
 ENV TOMCAT_USER tomcat
 ENV TOMCAT_UID 8983
 RUN groupadd -r $TOMCAT_USER && \
   useradd -r -u $TOMCAT_UID -g $TOMCAT_USER $TOMCAT_USER
-RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $CATALINA_HOME
+#RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $CATALINA_HOME
 RUN chmod -R ugo+rwx $CATALINA_HOME
-RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $FEDORA_HOME
+#RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $FEDORA_HOME
 RUN chmod -R ugo+rwx $FEDORA_HOME
 
 USER $TOMCAT_USER
 
 EXPOSE 8080
 ADD docker-entrypoint.sh /
-#ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["catalina.sh", "run"]
 

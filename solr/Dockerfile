@@ -14,6 +14,18 @@ RUN cp /tmp/Installation-5.1/solr.war $CATALINA_HOME/webapps/solr.war && \
 ENV SOLR_HOME /usr/local/solr
 ENV JAVA_OPTS -Djava.awt.headless=true -Dfile.encoding=UTF8 -XX:MaxPermSize=256m -Xms1024m -Xmx3072m  -Djava.security.auth.login.config=$JAAS_CONFIG -Dsolr.solr.home=$SOLR_HOME
 
+ENV TOMCAT_USER tomcat
+ENV TOMCAT_UID 8983
+RUN groupadd -r $TOMCAT_USER && \
+  useradd -r -u $TOMCAT_UID -g $TOMCAT_USER $TOMCAT_USER
+#RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $CATALINA_HOME
+RUN chmod -R ugo+rwx $CATALINA_HOME
+#RUN  chown -R $TOMCAT_USER:$TOMCAT_USER  $FEDORA_HOME
+RUN chmod -R ugo+rwx $SOLR_HOME
+
+USER $TOMCAT_USER
 
 EXPOSE 8080
+
+CMD ["catalina.sh", "run"]
 
