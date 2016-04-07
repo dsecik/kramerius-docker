@@ -9,8 +9,7 @@ RUN curl -sL https://github.com/ceskaexpedice/kramerius/releases/download/v5.1.0
 ENV SOLR_HOME /usr/local/solr
 RUN unzip /tmp/installation.zip -d /tmp/
 RUN cp /tmp/Installation-5.1/solr.war $CATALINA_HOME/webapps/solr.war && \
-    cp -r /tmp/Installation-5.1/solr $SOLR_HOME && \
-    chmod -R a+rwx /usr/local/solr
+    cp -r /tmp/Installation-5.1/solr $SOLR_HOME
 
 ENV SOLR_HOME /usr/local/solr
 ENV JAVA_OPTS -Djava.awt.headless=true -Dfile.encoding=UTF8 -XX:MaxPermSize=256m -Xms1024m -Xmx3072m  -Djava.security.auth.login.config=$JAAS_CONFIG -Dsolr.solr.home=$SOLR_HOME
