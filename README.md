@@ -26,4 +26,3 @@ vytvoříme soubor [docker-compose.yml](https://github.com/moravianlibrary/krame
 poté příkazem `docker-compose up -d`  pustíme.
 
 Konfigurace je popsaná [zde](https://github.com/moravianlibrary/kramerius-docker/wiki/Konfigurace-Krameria)
-
