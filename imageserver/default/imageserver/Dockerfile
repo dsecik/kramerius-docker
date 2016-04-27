@@ -20,7 +20,9 @@ ENV MEMCACHED_SERVERS=memcached
 
 #ADD test.jp2 /data/test.jp2
 
-RUN mkdir /data && chown :0 /data && chmod g+rwx /data
+RUN mkdir /data && chmod g+w /data
+RUN mkdir /test && chmod g+w /test
+
 
 EXPOSE 9000
 ADD init.sh /init.sh
