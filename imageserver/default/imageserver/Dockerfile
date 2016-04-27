@@ -18,7 +18,9 @@ ENV MAX_CVT=30000
 ENV MAX_LAYERS=10
 ENV MEMCACHED_SERVERS=memcached
 
-ADD test.jp2 /data/test.jp2
+#ADD test.jp2 /data/test.jp2
+
+RUN mkdir /data && chown :0 /data && chmod g+rwx /data
 
 EXPOSE 9000
 ADD init.sh /init.sh
