@@ -20,7 +20,7 @@ ENV MEMCACHED_SERVERS=memcached
 
 #ADD test.jp2 /data/test.jp2
 
-#RUN mkdir /data && chmod g+w /data
+RUN mkdir /data && chmod g+w /data
 #RUN mkdir /test && chmod g+w /test
 
 
